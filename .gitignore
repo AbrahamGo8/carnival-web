@@ -1,0 +1,18 @@
+### Git
+*.orig
+
+### JetBrains
+.idea/
+
+### Project
+pickles/
+
+### Python
+*.pyc
+__pycache__/
+
+### SQLite
+*.sqlite3
+
+### Tox
+.tox/

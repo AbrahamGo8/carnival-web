@@ -1,0 +1,24 @@
+version: '2'
+services:
+  webapp:
+    build: .
+    image: carnival-web
+    entrypoint: ["python", "run.py"]
+    links:
+      - postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mounting .carnival dir
+      - ~/.carnival:/home/carnival/.carnival
+      # Logs volume
+      - /tmp/log/carnival:/var/log/carnival
+      # IPython history
+      - ~/.ipython:/home/carnival/.ipython
+
+  postgres:
+    image: postgres:9.5
+    environment:
+      POSTGRES_USER: carnival
+      POSTGRES_PASSWORD: carnival
+      POSTGRES_DB: carnival_db

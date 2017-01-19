@@ -1,0 +1,5 @@
+Django
+docker-compose
+tox
+psycopg2
+ipdb
