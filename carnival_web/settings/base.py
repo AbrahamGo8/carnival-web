@@ -82,12 +82,8 @@ WSGI_APPLICATION = 'carnival_web.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'carnival_db',
-        'HOST': 'postgres',
-        'PORT': '5432',
-        'USER': 'carnival',
-        'PASSWORD': 'carnival'
     }
 }
 
