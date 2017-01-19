@@ -12,7 +12,7 @@ import sys
 
 
 class Main(object):
-    INPUT_COMMANDS = ('runserver', 'test', 'shell', 'tox')
+    INPUT_COMMANDS = ('runserver', 'shell')
 
     COMMAND_NAMES = INPUT_COMMANDS + (
         'build',
@@ -47,31 +47,9 @@ class Main(object):
     def collectstatic(self):
         return shlex.split(self.get_python() + " manage.py collectstatic")
 
-    def unit_tests(self):
-        command = shlex.split(self.get_virtualenv_bin('coverage') + ' run run_tests.py')
-        command.extend(['-a type=unit', '--with-xunit', '--xunit-file=.unittests_report/unittests.xml'])
-        return command
-
-    def integration_tests(self):
-        command = shlex.split(self.get_virtualenv_bin('coverage') + ' run run_tests.py')
-        command.append('-a type=integration')
-        return command
-
-    def canary_tests(self):
-        command = shlex.split(self.get_python() + ' run_canary.py')
-        command.append('-a type=canary')
-        return command
-
-    def test(self):
-        command = shlex.split(self.get_virtualenv_bin('coverage') + ' run run_tests.py')
-        command.append('-A type!="canary"')
-        return command
 
     def shell(self):
         return shlex.split(self.get_python() + " manage.py shell_plus")
-
-    def tox(self):
-        return ["tox"]
 
     def _print_menu(self):
         menu = "Carnival command:\n" + \
@@ -97,24 +75,10 @@ class Main(object):
             raise ValueError("Command not found: {}".format(name))
 
     def before_execute(self, input_command):
-        if input_command == 'unit_tests':
-            test_dirs = ['.unittests_report', '.coverage_report']
-            for d in test_dirs:
-                if not os.path.exists(d):
-                    os.mkdir(d)
-
         if input_command == 'shell':
             carnival_uid = pwd.getpwnam('carnival').pw_uid
             carnival_gid = pwd.getpwnam('carnival').pw_gid
             os.chown(os.path.expanduser('~/.ipython'), carnival_uid, carnival_gid)
-
-    def after_execute(self, input_command):
-        if input_command == 'unit_tests':
-            # Generate coverage report
-            coverage_xml = shlex.split(self.get_virtualenv_bin('coverage') + ' xml --include=./*')
-            subprocess.call(args=coverage_xml)
-            coverage_report = shlex.split(self.get_virtualenv_bin('coverage') + ' report --include=./*')
-            subprocess.call(args=coverage_report)
 
     def run_command(self, input_command, *args):
         # Get method
@@ -132,9 +96,6 @@ class Main(object):
                 p.wait()
             except KeyboardInterrupt:
                 pass
-
-        # After execute hooks
-        self.after_execute(input_command)
 
         return p.returncode
 
