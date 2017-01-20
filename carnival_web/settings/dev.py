@@ -1,1 +1,1 @@
-from carnival_web.settings import base
+from carnival_web.settings.base import *

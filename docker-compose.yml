@@ -15,6 +15,11 @@ services:
       - /tmp/log/carnival:/var/log/carnival
       # IPython history
       - ~/.ipython:/home/carnival/.ipython
+    environment:
+      - DJANGO_SETTINGS_MODULE=carnival_web.settings.dev
+      - CARNIVAL_POSTGRES_HOST=postgres
+      - CARNIVAL_POSTGRES_USERNAME=carnival
+      - CARNIVAL_POSTGRES_PASSWORD=carnival
 
   postgres:
     image: postgres:9.5
