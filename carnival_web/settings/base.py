@@ -37,6 +37,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 )
 
 CUSTOM_APPS = (
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'carnival_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,7 +92,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'eu-es'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'UTC'
 

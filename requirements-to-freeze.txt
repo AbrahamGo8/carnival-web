@@ -1,5 +1,6 @@
 Django
+django-extensions
 docker-compose
-tox
+flake8
 psycopg2
-ipdb
+tox
