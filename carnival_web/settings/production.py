@@ -11,6 +11,9 @@ DATABASES = {
         'HOST': os.environ['CARNIVAL_POSTGRES_HOST'],
         'PORT': '5432',
         'USER': os.environ['CARNIVAL_POSTGRES_USERNAME'],
-        'PASSWORD': os.environ['CARNIVAL_POSTGRES_PASSWORD']
+        'PASSWORD': os.environ['CARNIVAL_POSTGRES_PASSWORD'],
+        'TEST': {
+            'NAME': 'test_database',
+        },
     }
 }

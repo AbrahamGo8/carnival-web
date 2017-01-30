@@ -4,7 +4,6 @@ from django.urls.base import reverse
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, RedirectView
 # Create your views here.
@@ -19,19 +18,13 @@ class LoginView(FormView):
     template_name = 'login.html'
     redirect_field_name = REDIRECT_FIELD_NAME
 
-    @method_decorator(sensitive_post_parameters('password'))
-    @method_decorator(csrf_exempt)
+    @method_decorator(sensitive_post_parameters('password', ))
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
-        request.session.set_test_cookie()
-
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         login(self.request, form.get_user())
-
-        if self.request.session.test_cookie_worked():
-            self.request.session.delete_test_cookie()
 
         return super(LoginView, self).form_valid(form)
 

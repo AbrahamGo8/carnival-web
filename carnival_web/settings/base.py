@@ -40,11 +40,11 @@ DJANGO_APPS = (
     'django_extensions',
 )
 
-CUSTOM_APPS = (
-
+PROJECT_APPS = (
+    'webapp',
 )
 
-INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,6 +104,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'

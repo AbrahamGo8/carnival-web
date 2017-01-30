@@ -12,7 +12,7 @@ import sys
 
 
 class Main(object):
-    INPUT_COMMANDS = ('runserver', 'shell')
+    INPUT_COMMANDS = ('runserver', 'shell', 'test')
 
     COMMAND_NAMES = INPUT_COMMANDS + (
         'build',
@@ -47,9 +47,11 @@ class Main(object):
     def collectstatic(self):
         return shlex.split(self.get_python() + " manage.py collectstatic")
 
-
     def shell(self):
         return shlex.split(self.get_python() + " manage.py shell_plus")
+
+    def test(self):
+        return shlex.split(self.get_python() + " manage.py test")
 
     def _print_menu(self):
         menu = "Carnival command:\n" + \
