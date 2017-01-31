@@ -14,4 +14,9 @@ lint:
 .PHONY: test
 .ONESHELL:
 test:
-	python manage.py test
+	python manage.py test --settings=carnival_web.settings.test
+
+.PHONY: run
+.ONESHELL:
+run:
+	python manage.py runserver --settings=carnival_web.settings.local

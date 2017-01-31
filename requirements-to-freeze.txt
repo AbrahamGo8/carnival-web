@@ -2,7 +2,6 @@ Django
 django-extensions
 docker-compose
 flake8
-ipdb
 mock
 psycopg2
 tox
