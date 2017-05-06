@@ -1,15 +1,10 @@
 FROM python:3.6
 
-RUN groupadd -r carnival && useradd -r -g carnival carnival
+WORKDIR /usr/src/carnival
 
-WORKDIR /home/carnival/.carnival
-
-ADD requirements-to-freeze.txt /home/carnival/.carnival
+ADD requirements-to-freeze.txt /usr/src/carnival
 
 RUN pip install -r requirements-to-freeze.txt
 
-RUN chown -R carnival.carnival /home/carnival
+ADD . /usr/src/carnival
 
-RUN apt-get autoremove -y
-
-USER carnival

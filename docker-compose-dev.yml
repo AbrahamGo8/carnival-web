@@ -3,18 +3,16 @@ services:
   webapp:
     build: .
     image: carnival-web
-    entrypoint: ["python", "run.py"]
     links:
       - postgres
     ports:
       - "8000:8000"
     volumes:
       # Mounting .carnival dir
-      - ~/.carnival:/home/carnival/.carnival
+      - .:/usr/src/carnival
       # Logs volume
       - /tmp/log/carnival:/var/log/carnival
-      # IPython history
-      - ~/.ipython:/home/carnival/.ipython
+
     environment:
       - DJANGO_SETTINGS_MODULE=carnival_web.settings.production
       - CARNIVAL_POSTGRES_HOST=postgres
